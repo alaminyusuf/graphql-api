@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "allowJs": true,
+        "alwaysStrict": true,
+        "target": "ES6",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "pretty": true,
+        "rootDir": ".",
+        "moduleResolution": "Node",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
