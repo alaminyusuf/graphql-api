@@ -4,7 +4,8 @@ import { buildSchema } from 'type-graphql';
 
 import Hapi from '@hapi/hapi';
 
-import { HelloResolver } from './graphql/rosolvers/helloResolver'
+import { HelloResolver } from './graphql/Query/helloResolver'
+import connetToDB from './db/createConnection';
 
 async function StartServer() {
     const apolloServer = new ApolloServer({
@@ -22,7 +23,7 @@ async function StartServer() {
     app.route({
         method: 'GET',
         path: '/',
-        handler: (request, h) => {
+        handler: () => {
 
             return 'Hello World!';
         }
@@ -30,6 +31,7 @@ async function StartServer() {
 
     apolloServer.applyMiddleware({ app, cors: false });
 
+    connetToDB()
     await app.start();
     console.log('Server running on %s', app.info.uri);
 }
