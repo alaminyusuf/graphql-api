@@ -1,22 +1,25 @@
 import mongoose from 'mongoose'
 
 const userSchema = new mongoose.Schema({
-    // @Field(() => Int)
-    // id: number
-
     firstName: {
         type: String,
         required: true
-    }
+    },
 
-    // @Field(() => String, { nullable: false })
-    // second_name: string
+    lastName: {
+        type: String,
+        required: true
+    },
 
-    // @Field(() => String, { nullable: false })
-    // password: string
+    email: {
+        type: String,
+        required: true
+    },
 
-    // @Field(() => String, { nullable: false })
-    // email: string
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 
 })
 
