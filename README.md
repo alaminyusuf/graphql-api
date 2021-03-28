@@ -1,4 +1,12 @@
-# Contributing
+<div align="center">
+  <a href="https://github.com/alaminyusuf/graphql-api.git">
+    <img alt="bg-image" src="docs/graphql+node.png">
+  </a>
+  <br />
+  <br />
+</div>
+
+# GraphQL Api
 
 1. Fork and clone the **repo**.
 
