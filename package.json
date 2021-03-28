@@ -1,33 +1,33 @@
 {
   "name": "graphql-api",
   "version": "1.0.0",
-  "description": "An open Nodejs api using GraphQL",
-  "main": "index.ts",
+  "description": "Mock api built with graphQL and typescript",
+  "files": [
+    "./client/*",
+    "./server/*"
+  ],
   "scripts": {
-    "dev": "nodemon index"
+    "install": "cd client && yarn",
+    "server:install": "cd server && yarn"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alaminyusuf/graphql-api.git"
   },
   "keywords": [
-    "graphql",
+    "react",
+    "typescript",
     "nodejs",
     "express",
-    "opensource"
+    "react-testing-library",
+    "supertest",
+    "jest",
+    "boilerplate"
   ],
-  "author": "Al-amin Yusuf<alaminyusuf131@gmail.com>",
+  "author": "Al-amin Yusuf <alaminyusuf131@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "@hapi/hapi": "^20.1.0",
-    "apollo-server-hapi": "^2.21.1",
-    "dotenv": "^8.2.0",
-    "graphql": "^15.5.0",
-    "mongoose": "^5.12.0",
-    "reflect-metadata": "^0.1.13",
-    "type-graphql": "^1.1.1"
+  "bugs": {
+    "url": "https://github.com/alaminyusuf/graphql-api/issues"
   },
-  "devDependencies": {
-    "@types/hapi__hapi": "^20.0.5",
-    "@types/node": "^14.14.34",
-    "nodemon": "^2.0.7",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.2.3"
-  }
+  "homepage": "https://github.com/alaminyusuf/graphql-api#readme"
 }
