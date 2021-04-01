@@ -1,33 +1,34 @@
 {
-  "name": "graphql-api",
-  "version": "1.0.0",
-  "description": "Mock api built with graphQL and typescript",
-  "files": [
-    "./client/*",
-    "./server/*"
-  ],
-  "scripts": {
-    "install": "cd client && yarn",
-    "server:install": "cd server && yarn"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alaminyusuf/graphql-api.git"
-  },
-  "keywords": [
-    "react",
-    "typescript",
-    "nodejs",
-    "express",
-    "react-testing-library",
-    "supertest",
-    "jest",
-    "boilerplate"
-  ],
-  "author": "Al-amin Yusuf <alaminyusuf131@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/alaminyusuf/graphql-api/issues"
-  },
-  "homepage": "https://github.com/alaminyusuf/graphql-api#readme"
+	"name": "graphql-api",
+	"version": "1.0.0",
+	"description": "Mock api built with graphQL and typescript",
+	"files": [
+		"./client/*",
+		"./server/*"
+	],
+	"scripts": {
+		"install": "cd client && yarn",
+		"server:install": "cd server && yarn",
+		"dev:server": "cd server && yarn dev"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/alaminyusuf/graphql-api.git"
+	},
+	"keywords": [
+		"react",
+		"typescript",
+		"nodejs",
+		"express",
+		"react-testing-library",
+		"supertest",
+		"jest",
+		"boilerplate"
+	],
+	"author": "Al-amin Yusuf <alaminyusuf131@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/alaminyusuf/graphql-api/issues"
+	},
+	"homepage": "https://github.com/alaminyusuf/graphql-api#readme"
 }

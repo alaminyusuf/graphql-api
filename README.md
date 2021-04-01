@@ -16,7 +16,7 @@
       yarn client:install
    ```
 
-3. To start running the server, Run
+3. To start running the client server, Run
 
    ```javascript
       yarn start:client
