@@ -21,6 +21,5 @@ export class User {
 	email: string;
 
 	@Column({ type: 'varchar', nullable: false })
-	@Field(() => String)
 	password: string;
 }

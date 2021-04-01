@@ -17,6 +17,7 @@
 	"dependencies": {
 		"@hapi/hapi": "^20.1.0",
 		"apollo-server-hapi": "^2.21.1",
+		"argon2": "^0.27.2",
 		"dotenv": "^8.2.0",
 		"graphql": "^15.5.0",
 		"mongoose": "^5.12.0",

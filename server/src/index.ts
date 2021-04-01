@@ -14,9 +14,8 @@ async function StartServer() {
 		host: 'localhost',
 		port: 27017,
 		database: 'graphql-api',
-		logging: false,
-		entities: ['src/db/models/*{.ts,.js}'],
-		migrations: ['src/migration/**/*{.ts,.js}'],
+		logging: true,
+		entities: ['src/models/*{.ts,.js}'],
 		useUnifiedTopology: true,
 	}).then((conn) => console.log('MongoDB connected', conn.isConnected));
 
