@@ -1,21 +1,22 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "allowJs": true,
-    "target": "ES6",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "pretty": true,
-    "sourceMap": true,
-    "rootDir": ".",
-    "strictNullChecks": true,
-    "noUnusedLocals": true,
-    "strict": true,
-    "moduleResolution": "Node",
-    "strictPropertyInitialization": false,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "lib": ["es6", "ES2017", "ES2020", "dom"]
-  },
-  "exclude": ["node_modules"]
+	"compilerOptions": {
+		"module": "commonjs",
+		"allowJs": true,
+		"target": "ES6",
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"pretty": true,
+		"sourceMap": true,
+		"rootDir": ".",
+		"strictNullChecks": true,
+		"noUnusedLocals": true,
+		"strict": true,
+		"moduleResolution": "Node",
+		"strictPropertyInitialization": false,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"lib": ["es6", "ES2017", "ES2020", "dom"],
+		"noImplicitReturns": true
+	},
+	"exclude": ["node_modules"]
 }

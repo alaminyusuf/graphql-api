@@ -15,5 +15,5 @@ export class UserResponse {
 	user?: User;
 
 	@Field(() => ResponseError, { nullable: true })
-	error?: ResponseError;
+	errors?: ResponseError;
 }
