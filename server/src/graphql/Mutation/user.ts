@@ -36,6 +36,34 @@ export class UserResolver {
 		return { user };
 	}
 
+	@Mutation(() => UserResponse)
+	async login(
+		@Arg('email', () => String) email: string,
+		@Arg('password', () => String) password: string
+	): Promise<UserResponse> {
+		const user = await User.findOne({ where: { email } });
+		if (!user) {
+			return {
+				errors: {
+					field: 'user',
+					message: 'user does not exits',
+				},
+			};
+		}
+
+		const valid = await argon.verify(user.password, password);
+
+		if (!valid) {
+			return {
+				errors: {
+					field: 'password',
+					message: 'password mismatch',
+				},
+			};
+		}
+		return { user };
+	}
+
 	@Mutation(() => String)
 	hey(@Arg('name', () => String) name: string) {
 		return `Hello ${name}`;
