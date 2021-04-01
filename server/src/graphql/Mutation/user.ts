@@ -21,7 +21,7 @@ export class UserResolver {
 				last_name: options.last_name,
 				email: options.email,
 				password: hashedPassword,
-			});
+			}).save();
 			user = result;
 		} catch (e) {
 			if (e.code == '23505') {

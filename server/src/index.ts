@@ -7,6 +7,7 @@ import Hapi from '@hapi/hapi';
 
 import { HelloResolver } from './graphql/Query/helloResolver';
 import { UserResolver } from './graphql/Mutation/user';
+import { UserQuery } from './graphql/Query/user';
 
 async function StartServer() {
 	await createConnection({
@@ -21,7 +22,7 @@ async function StartServer() {
 
 	const apolloServer = new ApolloServer({
 		schema: await buildSchema({
-			resolvers: [HelloResolver, UserResolver],
+			resolvers: [HelloResolver, UserResolver, UserQuery],
 			validate: false,
 		}),
 	});
