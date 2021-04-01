@@ -6,7 +6,7 @@ import { createConnection } from 'typeorm';
 import Hapi from '@hapi/hapi';
 
 import { HelloResolver } from './graphql/Query/helloResolver';
-import { UserResolver } from './graphql/Mutation/addUser';
+import { UserResolver } from './graphql/Mutation/user';
 
 async function StartServer() {
 	await createConnection({
