@@ -1,26 +1,8 @@
-import { Arg, Field, Mutation, ObjectType, Resolver } from 'type-graphql';
+import { Arg, Mutation, Resolver } from 'type-graphql';
 import { User } from '../../models/User';
 import { InputOptions } from './inputOptions';
-// import { getMongoManager } from 'typeorm';
 import argon from 'argon2';
-
-@ObjectType()
-class ResponseError {
-	@Field(() => String)
-	field: string;
-
-	@Field(() => String)
-	message: string;
-}
-
-@ObjectType()
-class UserResponse {
-	@Field(() => User, { nullable: true })
-	user?: User;
-
-	@Field(() => ResponseError, { nullable: true })
-	error?: ResponseError;
-}
+import { UserResponse } from '../utils/fieldsUtil';
 
 @Resolver()
 export class UserResolver {
