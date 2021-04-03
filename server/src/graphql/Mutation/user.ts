@@ -1,4 +1,5 @@
-import { Arg, Mutation, Resolver } from 'type-graphql';
+import { MyContext } from './../../types';
+import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
 import { User } from '../../models/User';
 import { InputOptions } from '../utils/inputOptions';
 import argon from 'argon2';
@@ -9,7 +10,8 @@ import { validationUtil } from '../utils/validationUtil';
 export class UserResolver {
 	@Mutation(() => UserResponse)
 	async addUser(
-		@Arg('options', () => InputOptions) options: InputOptions
+		@Arg('options', () => InputOptions) options: InputOptions,
+		@Ctx() { req }: MyContext
 	): Promise<UserResponse> {
 		let user;
 		const errors = validationUtil(options);
@@ -33,13 +35,17 @@ export class UserResolver {
 				};
 			}
 		}
+		if (typeof user !== 'undefined') {
+			req.session.userId = user.id;
+		}
 		return { user };
 	}
 
 	@Mutation(() => UserResponse)
 	async login(
 		@Arg('email', () => String) email: string,
-		@Arg('password', () => String) password: string
+		@Arg('password', () => String) password: string,
+		@Ctx() { req }: MyContext
 	): Promise<UserResponse> {
 		const user = await User.findOne({ where: { email } });
 		if (!user) {
@@ -61,6 +67,8 @@ export class UserResolver {
 				},
 			};
 		}
+		console.log(req);
+		req.session.userId = user.id;
 		return { user };
 	}
 
