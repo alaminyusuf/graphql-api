@@ -1,13 +1,19 @@
 import 'reflect-metadata';
-import { ApolloServer } from 'apollo-server-hapi';
+import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
+import { MyContext } from './types';
 
-import Hapi from '@hapi/hapi';
+import express from 'express';
+import dotenv from 'dotenv';
+import MongoStore from 'connect-mongo';
+import session from 'express-session';
 
 import { HelloResolver } from './graphql/Query/helloResolver';
 import { UserResolver } from './graphql/Mutation/user';
 import { UserQuery } from './graphql/Query/user';
+
+dotenv.config();
 
 async function StartServer() {
 	await createConnection({
@@ -20,30 +26,42 @@ async function StartServer() {
 		useUnifiedTopology: true,
 	}).then((conn) => console.log('MongoDB connected', conn.isConnected));
 
+	const app = express();
+
+	app.use(
+		session({
+			store: new MongoStore({
+				mongoUrl: process.env.MONGO_URI,
+				mongoOptions: {
+					appname: 'graphql-api',
+					useUnifiedTopology: true,
+				},
+			}),
+			cookie: {
+				maxAge: 1000 * 60 * 60 * 24 * 365,
+				httpOnly: true,
+				secure: false,
+			},
+			resave: false,
+			secret: process.env.COOKIE_SECRET!,
+			name: process.env.COOKIE_NAME,
+			saveUninitialized: false,
+		})
+	);
+
+	app.get('/', (req, res) => '<h1>Hello from this awesome mock Api</h1>');
+
 	const apolloServer = new ApolloServer({
 		schema: await buildSchema({
 			resolvers: [HelloResolver, UserResolver, UserQuery],
 			validate: false,
 		}),
-	});
-
-	const app = Hapi.server({
-		port: 3000,
-		host: 'localhost',
-	});
-
-	app.route({
-		method: 'GET',
-		path: '/',
-		handler: () => {
-			return '<h1>Hello from GraphQL Api</h1>';
-		},
+		context: ({ req, res }): MyContext => ({ req, res }),
 	});
 
 	apolloServer.applyMiddleware({ app, cors: false });
 
-	await app.start();
-	console.log('Server running on %s', app.info.uri);
+	app.listen(3000, () => console.log('Server running'));
 }
 
 StartServer().catch((error) => console.error('Error:', error));
