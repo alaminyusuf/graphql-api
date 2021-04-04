@@ -14,6 +14,15 @@ export class UserResolver {
 		@Ctx() { req }: MyContext
 	): Promise<UserResponse> {
 		let user;
+		const alreadyAUser = User.findOne({ email: options.email });
+		if (alreadyAUser) {
+			return {
+				errors: {
+					field: 'user',
+					message: 'user already exists',
+				},
+			};
+		}
 		const errors = validationUtil(options);
 		if (errors) return { errors };
 		try {
