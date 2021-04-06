@@ -14,3 +14,12 @@ export class InputOptions {
 	@Field(() => String)
 	last_name: string;
 }
+
+@InputType()
+export class LoginOptions {
+	@Field(() => String)
+	email: string;
+
+	@Field(() => String)
+	password: string;
+}

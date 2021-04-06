@@ -1,8 +1,9 @@
-import { MyContext } from './../../types';
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
+import argon from 'argon2';
+
+import { MyContext } from './../../types';
 import { User } from '../../models/User';
 import { InputOptions } from '../utils/inputOptions';
-import argon from 'argon2';
 import { UserResponse } from '../utils/fieldsUtil';
 import { validationUtil } from '../utils/validationUtil';
 
@@ -56,7 +57,9 @@ export class UserResolver {
 		@Arg('password', () => String) password: string,
 		@Ctx() { req }: MyContext
 	): Promise<UserResponse> {
-		const user = await User.findOne({ where: { email } });
+		let user;
+		const fetched = await User.findOne({ email: email });
+		console.log(user);
 		if (!user) {
 			return {
 				errors: {
@@ -65,6 +68,7 @@ export class UserResolver {
 				},
 			};
 		}
+		user = fetched;
 
 		const valid = await argon.verify(user.password, password);
 
@@ -76,7 +80,6 @@ export class UserResolver {
 				},
 			};
 		}
-		console.log(req);
 		req.session.userId = user.id;
 		return { user };
 	}

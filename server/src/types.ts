@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
-import { SessionData } from 'express-session';
+import { Session } from 'express-session';
+import { ObjectID } from 'typeorm';
 
 export type MyContext = {
 	res: Response;
-	req: Request & { session: SessionData };
+	req: Request & { session?: Session & { userId?: string | ObjectID } };
 };

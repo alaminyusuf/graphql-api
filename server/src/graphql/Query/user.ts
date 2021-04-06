@@ -1,5 +1,7 @@
-import { Resolver, Query, Arg } from 'type-graphql';
+import { UserResponse } from './../utils/fieldsUtil';
+import { Resolver, Query, Arg, Ctx } from 'type-graphql';
 import { User } from '../../models/User';
+import { MyContext } from '../../types';
 
 @Resolver()
 export class UserQuery {
@@ -8,8 +10,16 @@ export class UserQuery {
 		return await User.find();
 	}
 
-	@Query(() => User)
-	async user(@Arg('id', () => String) id: string): Promise<User | undefined> {
-		return await User.findOne(id);
+	@Query(() => UserResponse)
+	async user(@Arg('id', () => String) id: string): Promise<UserResponse> {
+		const user = await User.findOne(id);
+		return { user };
+	}
+
+	@Query(() => User, { nullable: true })
+	async currentUser(@Ctx() { req }: MyContext): Promise<User | undefined> {
+		// if (!req.session.userId) return null;
+		const user = await User.findOne({ where: { id: req.session.userId } });
+		return user;
 	}
 }

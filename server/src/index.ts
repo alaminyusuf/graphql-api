@@ -8,6 +8,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import MongoStore from 'connect-mongo';
 import session from 'express-session';
+import cors from 'cors';
 
 import { HelloResolver } from './graphql/Query/helloResolver';
 import { UserResolver } from './graphql/Mutation/user';
@@ -27,6 +28,13 @@ async function StartServer() {
 	}).then((conn) => console.log('MongoDB connected', conn.isConnected));
 
 	const app = express();
+
+	app.use(
+		cors({
+			origin: 'http://localhost:3000',
+			credentials: true,
+		})
+	);
 
 	app.use(
 		session({
@@ -49,7 +57,9 @@ async function StartServer() {
 		})
 	);
 
-	app.get('/', (req, res) => '<h1>Hello from this awesome mock Api</h1>');
+	app.get('/', (req, res) =>
+		res.send('<h1>Hello from this awesome mock Api</h1>')
+	);
 
 	const apolloServer = new ApolloServer({
 		schema: await buildSchema({
