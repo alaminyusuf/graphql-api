@@ -17,9 +17,13 @@ export class UserQuery {
 	}
 
 	@Query(() => User, { nullable: true })
-	async currentUser(@Ctx() { req }: MyContext): Promise<User | undefined> {
-		// if (!req.session.userId) return null;
-		const user = await User.findOne({ where: { id: req.session.userId } });
+	async currentUser(@Ctx() { req }: MyContext) {
+		if (!req.session.userId) return undefined;
+
+		const refId = req.session.userId;
+
+		const user = await User.findOne(refId);
+
 		return user;
 	}
 }

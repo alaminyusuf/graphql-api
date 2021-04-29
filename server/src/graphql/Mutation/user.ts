@@ -15,7 +15,7 @@ export class UserResolver {
 		@Ctx() { req }: MyContext
 	): Promise<UserResponse> {
 		let user;
-		const alreadyAUser = User.findOne({ email: options.email });
+		const alreadyAUser = await User.findOne({ email: options.email });
 		if (alreadyAUser) {
 			return {
 				errors: {
@@ -85,5 +85,11 @@ export class UserResolver {
 	@Mutation(() => String)
 	hey(@Arg('name', () => String) name: string) {
 		return `Hello ${name}`;
+	}
+
+	@Mutation(() => Boolean)
+	async deleteUser(@Arg('id', () => String) id: string): Promise<boolean> {
+		await User.delete(id);
+		return true;
 	}
 }
