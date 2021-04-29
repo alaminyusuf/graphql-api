@@ -57,8 +57,7 @@ export class UserResolver {
 		@Arg('password', () => String) password: string,
 		@Ctx() { req }: MyContext
 	): Promise<UserResponse> {
-		let user;
-		const fetched = await User.findOne({ email: email });
+		const user = await User.findOne({ email: email });
 		console.log(user);
 		if (!user) {
 			return {
@@ -68,7 +67,6 @@ export class UserResolver {
 				},
 			};
 		}
-		user = fetched;
 
 		const valid = await argon.verify(user.password, password);
 
