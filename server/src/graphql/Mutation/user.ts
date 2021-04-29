@@ -58,7 +58,6 @@ export class UserResolver {
 		@Ctx() { req }: MyContext
 	): Promise<UserResponse> {
 		const user = await User.findOne({ email: email });
-		console.log(user);
 		if (!user) {
 			return {
 				errors: {
