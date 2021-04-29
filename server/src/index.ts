@@ -10,7 +10,6 @@ import MongoStore from 'connect-mongo';
 import session from 'express-session';
 import cors from 'cors';
 
-import { HelloResolver } from './graphql/Query/helloResolver';
 import { UserResolver } from './graphql/Mutation/user';
 import { UserQuery } from './graphql/Query/user';
 
@@ -63,7 +62,7 @@ async function StartServer() {
 
 	const apolloServer = new ApolloServer({
 		schema: await buildSchema({
-			resolvers: [HelloResolver, UserResolver, UserQuery],
+			resolvers: [UserResolver, UserQuery],
 			validate: false,
 		}),
 		context: ({ req, res }): MyContext => ({ req, res }),
